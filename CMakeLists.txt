@@ -30,7 +30,7 @@ set(STSDL_SRCS
 
 find_package(SDL REQUIRED)
 
-add_library(st-preload SHARED st-preload.c)
+add_library(st-preload SHARED st-preload.c msg_queue.c)
 target_include_directories(st-preload PRIVATE ${SDL_INCLUDE_DIR})
 target_link_libraries(st-preload PRIVATE ${SDL_LIBRARY})
 
@@ -48,6 +48,10 @@ if(TARGET_PLATFORM STREQUAL "retrofw")
   include(CMake/retrofw_defs.cmake)
 elseif(TARGET_PLATFORM STREQUAL "rg350")
   include(CMake/rg350_defs.cmake)
+elseif(TARGET_PLATFORM STREQUAL "lepus")
+  include(CMake/lepus_defs.cmake)
+elseif(TARGET_PLATFORM STREQUAL "rg99")
+  include(CMake/rg99_defs.cmake)
 endif()
 
 foreach(

@@ -13,7 +13,7 @@ if [[ $# -eq 0 ]]; then
 	exit 1
 fi
 
-if [[ $1 != rg350 ]] && [[ $1 != retrofw ]]; then
+if [[ $1 != rg350 ]] && [[ $1 != lepus ]] && [[ $1 != rg99 ]] && [[ $1 != retrofw ]]; then
 	echo "Error: invalid target"
 	usage
 	exit 1
@@ -24,9 +24,13 @@ declare -r BUILD_DIR="${2:-"build-${TARGET}"}"
 declare -r OUT="${3:-"$BUILD_DIR/st-${TARGET}.opk"}"
 
 main() {
-  local ext=gcw0
+  local ext
   if [[ $TARGET == retrofw ]]; then
     ext=retrofw
+  elif [[ $TARGET == rg350 ]]; then
+    ext=gcw0
+  else
+    ext="$TARGET"
   fi
   set -x
   mksquashfs \
